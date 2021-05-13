@@ -43,7 +43,7 @@ async def change_status(data: dict):
             name = data["name"]
             st = data["status"]
 
-            c = json.loads(base[str(floor) + "fl_marks"])
+            c = json.loads(base[floor + "fl_marks"])
             for i in c:
                 if i["name"] == name:
                     i["status"] = int(st)

@@ -34,11 +34,22 @@ async def load(data: dict):
 
 @app.post("/change")
 async def change_status(data: dict):
+    print(dict)
     try:
         with open(datafile, "r") as fin:
             base = json.loads(fin.read())
-            if id in base:
-                base[data["ID"]]["status"] = data["status"]
+
+            floor = data["floor"]
+            name = data["name"]
+            st = data["status"]
+
+            c = json.loads(base[str(floor) + "fl_marks"])
+            for i in c:
+                if i["name"] == name:
+                    i["status"] = st
+
+            base[str(floor) + "fl_marks"] = json.dumps(c)
+
         with open(datafile, "w") as fout:
             fout.write(json.dumps(base))
     except (KeyError, FileNotFoundError) as exc:

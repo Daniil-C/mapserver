@@ -46,9 +46,9 @@ async def change_status(data: dict):
             c = json.loads(base[str(floor) + "fl_marks"])
             for i in c:
                 if i["name"] == name:
-                    i["status"] = st
+                    i["status"] = int(st)
 
-            base[str(floor) + "fl_marks"] = json.dumps(c)
+            base[floor + "fl_marks"] = json.dumps(c)
 
         with open(datafile, "w") as fout:
             fout.write(json.dumps(base))
